@@ -53,60 +53,48 @@ def remove_namespace(s=''):
 def rename_bones(s='', t='unreal'):
     """function for renaming the armature bones to a target skeleton"""
     unreal = {
-        'root': 'Root',
-        'Hips': 'Pelvis',
-        'Spine': 'spine_01',
-        'Spine1': 'spine_02',
-        'Spine2': 'spine_03',
-        'LeftShoulder': 'clavicle_l',
-        'LeftArm': 'upperarm_l',
-        'LeftForeArm': 'lowerarm_l',
-        'LeftHand': 'hand_l',
-        'RightShoulder': 'clavicle_r',
-        'RightArm': 'upperarm_r',
-        'RightForeArm': 'lowerarm_r',
-        'RightHand': 'hand_r',
-        'Neck1': 'neck_01',
-        'Neck': 'neck_01',
-        'Head': 'head',
-        'LeftUpLeg': 'thigh_l',
-        'LeftLeg': 'calf_l',
-        'LeftFoot': 'foot_l',
-        'RightUpLeg': 'thigh_r',
-        'RightLeg': 'calf_r',
-        'RightFoot': 'foot_r',
-        'LeftHandIndex1': 'index_01_l',
-        'LeftHandIndex2': 'index_02_l',
-        'LeftHandIndex3': 'index_03_l',
-        'LeftHandMiddle1': 'middle_01_l',
-        'LeftHandMiddle2': 'middle_02_l',
-        'LeftHandMiddle3': 'middle_03_l',
-        'LeftHandPinky1': 'pinky_01_l',
-        'LeftHandPinky2': 'pinky_02_l',
-        'LeftHandPinky3': 'pinky_03_l',
-        'LeftHandRing1': 'ring_01_l',
-        'LeftHandRing2': 'ring_02_l',
-        'LeftHandRing3': 'ring_03_l',
-        'LeftHandThumb1': 'thumb_01_l',
-        'LeftHandThumb2': 'thumb_02_l',
-        'LeftHandThumb3': 'thumb_03_l',
-        'RightHandIndex1': 'index_01_r',
-        'RightHandIndex2': 'index_02_r',
-        'RightHandIndex3': 'index_03_r',
-        'RightHandMiddle1': 'middle_01_r',
-        'RightHandMiddle2': 'middle_02_r',
-        'RightHandMiddle3': 'middle_03_r',
-        'RightHandPinky1': 'pinky_01_r',
-        'RightHandPinky2': 'pinky_02_r',
-        'RightHandPinky3': 'pinky_03_r',
-        'RightHandRing1': 'ring_01_r',
-        'RightHandRing2': 'ring_02_r',
-        'RightHandRing3': 'ring_03_r',
-        'RightHandThumb1': 'thumb_01_r',
-        'RightHandThumb2': 'thumb_02_r',
-        'RightHandThumb3': 'thumb_03_r',
-        'LeftToeBase': 'ball_l',
-        'RightToeBase': 'ball_r'
+        'Root': 'Root',
+        'Pelvis': 'Pelvis',
+        'spine_01': 'spine_01',
+        'spine_02': 'spine_02',
+        'spine_03': 'spine_03',
+        'clavicle_l': 'clavicle_l',
+        'UpperArm_L': 'upperarm_l',
+        'lowerarm_l': 'lowerarm_l',
+        'Hand_L': 'hand_l',
+        'clavicle_r': 'clavicle_r',
+        'UpperArm_R': 'upperarm_r',
+        'lowerarm_r': 'lowerarm_r',
+        'Hand_R': 'hand_r',
+        'neck_01': 'neck_01',
+        'neck_01': 'neck_01',
+        'head': 'head',
+        'Thigh_L': 'thigh_l',
+        'calf_l': 'calf_l',
+        'Foot_L': 'foot_l',
+        'Thigh_R': 'thigh_r',
+        'calf_r': 'calf_r',
+        'Foot_R': 'foot_r',
+        'indexFinger_01_l': 'index_01_l',
+        'indexFinger_02_l': 'index_02_l',
+        'indexFinger_03_l': 'index_03_l',
+        'finger_01_l': 'middle_01_l',
+        'finger_02_l': 'middle_02_l',
+        'finger_03_l': 'middle_03_l',
+        'thumb_01_l': 'thumb_01_l',
+        'thumb_02_l': 'thumb_02_l',
+        'thumb_03_l': 'thumb_03_l',
+        'indexFinger_01_r': 'index_01_r',
+        'indexFinger_02_r': 'index_02_r',
+        'indexFinger_03_r': 'index_03_r',
+        'finger_01_r': 'middle_01_r',
+        'finger_02_r': 'middle_02_r',
+        'finger_03_r': 'middle_03_r',
+        'thumb_01_r': 'thumb_01_r',
+        'thumb_02_r': 'thumb_02_r',
+        'thumb_03_r': 'thumb_03_r',
+        'ball_l': 'ball_l',
+        'ball_r': 'ball_r'
     }
     schema = {'unreal': unreal }
     if type(s) == str:
@@ -236,15 +224,15 @@ def hip_to_root(armature, use_x=True, use_y=True, use_z=True, on_ground=True, us
     root.rotation_mode = 'QUATERNION'
     framerange = root.animation_data.action.frame_range
 
-    for hipname in ('Hips', 'mixamorig:Hips', 'mixamorig_Hips', 'Pelvis', hipname):
+    for hipname in ('Pelvis', 'mixamorig:Pelvis', 'mixamorig_Pelvis', 'Pelvis', hipname):
         hips = root.pose.bones.get(hipname)
         if hips != None:
             break
     if hips == None:
         log.warning('WARNING I have not found any hip bone for %s and the conversion is stopping here',  root.pose.bones)
-        raise ValueError("no hips found")
+        raise ValueError("no Pelvis found")
     else:
-        yield Status("hips found")
+        yield Status("Pelvis found")
 
     key_all_bones(root, (1, 2))
 
